@@ -16,12 +16,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from api.login.login_view import login_views  # Importación de la vista de login
-from api.home.home_view import home_views    # Importación de la vista de home
+from api.login.login_view import (
+    login_view,          
+    recuperar_view,      
+    registro_view,       
+    logout_view          
+)
+from api.home.home_view import home_views  
 
 urlpatterns = [
-    path('admin/', admin.site.urls),                  # Ruta del panel de administración
-    path('login/', login_views, name='login'),        # Ruta para el login
-    path('', home_views, name='home'),                # Ruta para la vista principal (home)
+    path('admin/', admin.site.urls),  
+    path('', home_views, name='index'),  
+    path('index/', home_views, name='index'), 
+    path('auth-login-basic/', login_view, name='auth-login-basic'),  
+    path('auth-forgot-password-basic/', recuperar_view, name='auth-forgot-password-basic'),  
+    path('auth-register-basic/', registro_view, name='auth-register-basic'),  
+    
+    path('logout/', logout_view, name='logout'),  
 ]
-
